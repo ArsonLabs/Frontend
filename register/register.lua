@@ -18,16 +18,12 @@ gurt.select('#register'):on('click', function()
             })
         })
         if response:ok() then
-            local data = response:json()  -- Parse JSON response
             local text = response:text()  -- Get as text
             
-            trace.log('Status: ' .. response.status)
-            trace.log('Status Text: ' .. response.statusText)
-            
-            -- Access headers
-            local contentType = response.headers['content-type']
+            gurt.location.goto("gurt://localhost/login")
         else
-            trace.log('Request failed with status: ' .. response.status)
+            local text = response:text()
+            gurt.select('#notmatch').text = "Error " .. response.status .. ": " .. text
         end
     else    
         gurt.select('#notmatch').text = 'Passwords do not match.'

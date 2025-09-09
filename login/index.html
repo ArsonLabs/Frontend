@@ -31,18 +31,18 @@
             <div style="display: flex; flex-direction: column; gap: 4;">
                 <p style="block text-sm font-medium text-slate-700 mb-1">Username</p>
             </div>
-            <input type="text" placeholder="CreeperITA104" maxlength="20" minlength="1" style="p-3 border border-slate-300 rounded-md shadow-sm focus:outline-none focus:ring-amber-600 focus:border-amber-600 transition duration-150 ease-in-out"/>
+            <input id="username" type="text" placeholder="CreeperITA104" maxlength="20" minlength="1" style="p-3 border border-slate-300 rounded-md shadow-sm focus:outline-none focus:ring-amber-600 focus:border-amber-600 transition duration-150 ease-in-out"/>
 
             <div style="display: flex; flex-direction: column; gap: 4;">
                 <div style="flex items-center justify-between mb-1">
                     <p style="block text-sm font-medium text-slate-700">Password</p>
                 </div>
             </div>
-            <input type="password" id="password" name="password" required="true"
+            <input id="password" type="password" id="password" name="password" required="true"
                     style="p-3 border border-slate-300 rounded-md shadow-sm focus:outline-none focus:ring-amber-600 focus:border-amber-600 transition duration-150 ease-in-out"
                     placeholder="••••••••" />
             <a href="#" style="text-sm text-amber-600 hover:underline">Forgot password?</a>
-
+            <p id="error" style="block text-sm font-medium text-red-600"></p>
             <button id="login"type="submit"
                 style="w-full bg-amber-600 text-white px-5 py-3 rounded-md font-bold hover:bg-amber-700 active:bg-amber-800 transition duration-150 ease-in-out">
                 Sign In
