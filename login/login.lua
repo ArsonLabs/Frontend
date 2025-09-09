@@ -22,7 +22,7 @@ gurt.select('#login'):on('click', function()
             value = data.token,
             lifetime = 259200
         })
-        gurt.location.goto("gurt://arson.dev/dashboard")
+        gurt.location.goto("gurt://localhost/dashboard")
     else
         local text = response:text()
         gurt.select('#error').text = "Error " .. response.status .. ": " .. text
