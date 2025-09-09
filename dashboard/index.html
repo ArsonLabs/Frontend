@@ -1,0 +1,71 @@
+<head>
+    <title>Arsonflare</title>
+    <icon src="logo.png" />
+    <meta name="theme-color" content="#ff6933" />
+    <meta name="description" content="ArsonFlare provides state of the art ddos protection, static website hosting and a gurted to http translation proxy." />
+
+    <style>
+        body {
+            bg-[#FFFFFF]
+            text-slate-800
+            font-sans
+        }
+    </style>
+    <script src="main.lua" />
+</head>
+
+<body style="bg-[#FFFFFF]">
+
+    <div style="flex flex-row justify-between items-center px-24 py-4 gap-10">
+        <div style="flex flex-row items-center">
+            <div style="w-8 h-8 bg-amber-600 rounded flex items-center justify-center">
+                <p style="text-white font-bold text-lg">A</p>
+            </div>
+            <p style="font-bold text-lg text-black">rsonFlare</p>
+        </div>
+        <p style="text-black">Username</p>
+    </div>
+
+    <div style="text-center mb-8">
+            <h1 style="text-3xl font-bold text-slate-900 mb-2">
+                Arsonflare Dashboard
+            </h1>
+            <p style="text-md text-slate-600">
+                Manage your domains.
+            </p>
+    </div>
+    <separator style="my-8 border-t border-black" />
+    <div style="text-center mb-8">
+            <form id="domainForm" style="space-y-6">
+                <div style="display: flex; flex-direction: column; gap: 4;">
+                    <p style="block text-sm font-medium text-slate-700 mb-1">Select the domain to manage.</p>
+                </div>
+                <select style="text-center max-w-40 max-h-32">
+                    <option value="option1" selected="true">arsonflare.aura</option>
+                    <option value="option2">arson.dev</option>
+                    <option value="option3">example.web</option>
+                </select>
+
+                <div style="display: flex; flex-direction: column; gap: 4;">
+                    <p style="block text-sm font-medium text-slate-700 mb-1">Select what you want to enable on the domain.</p>
+                </div>
+                <select style="text-center max-w-40 max-h-32">
+                    <option value="option1" selected="true">Static web hosting</option>
+                    <option value="option2">Proxying</option>
+                </select>
+
+                <div style="display: flex; flex-direction: column; gap: 4;">
+                    <p style="block text-sm font-medium text-slate-700 mb-1">Input the origin.</p>
+                </div>
+                <input id="origin" type="text" placeholder="255.255.255.255" maxlength="1000" minlength="1" />
+
+                <button id="deploy"type="submit"
+                    style="w-full bg-amber-600 text-white px-5 py-3 rounded-md font-bold hover:bg-amber-700 active:bg-amber-800 transition duration-150 ease-in-out">
+                    deploy
+                </button>
+        </form>
+    </div>
+   
+    <separator style="my-8 border-t border-black" />
+    <p style="text-black text-sm">© 2025 ArsonFlare — All rights reserved.</p>
+</body>

@@ -1,0 +1,71 @@
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>ArsonFlare Login</title>
+    <script src="register.lua" />
+</head>
+<body style="bg-[#FFFFFF] text-slate-800 font-sans flex items-center justify-center min-h-screen p-4">
+
+    
+    <div style="bg-white p-8 md:p-12 rounded-lg shadow-xl border border-slate-200 max-w-sm w-full mx-auto my-auto">
+        
+        <div style="flex flex-row items-center">
+            <div style="w-8 h-8 bg-amber-600 rounded flex items-center justify-center">
+                <p style="text-white font-bold text-lg">A</p>
+            </div>
+            <p style="font-bold text-lg text-black">rsonFlare</p>
+        </div>
+
+        
+        <div style="text-center mb-8">
+            <h1 style="text-3xl font-bold text-slate-900 mb-2">
+                Create your account
+            </h1>
+            <p style="text-md text-slate-600">
+                Welcome! Enter your details to continue.
+            </p>
+        </div>
+
+        
+        <form id="loginForm" style="space-y-6">
+            <div style="display: flex; flex-direction: column; gap: 4;">
+                <p style="block text-sm font-medium text-slate-700 mb-1">Choose a username</p>
+            </div>
+            <input id="username" type="text" placeholder="CreeperITA104" maxlength="20" minlength="1" style="p-3 border border-slate-300 rounded-md shadow-sm focus:outline-none focus:ring-amber-600 focus:border-amber-600 transition duration-150 ease-in-out"/>
+
+            <div style="display: flex; flex-direction: column; gap: 4;">
+                <div style="flex items-center justify-between mb-1">
+                    <p style="block text-sm font-medium text-slate-700">Choose a password</p>
+                </div>
+            </div>
+            <p id="notmatch2" style="block text-sm font-medium text-red-600"></p>
+            <input type="password" id="password" name="password" required="true"
+                    style="p-3 border border-slate-300 rounded-md shadow-sm focus:outline-none focus:ring-amber-600 focus:border-amber-600 transition duration-150 ease-in-out"
+                    placeholder="••••••••" />
+
+            <div style="display: flex; flex-direction: column; gap: 4;">
+                <div style="flex items-center justify-between mb-1">
+                    <p style="block text-sm font-medium text-slate-700">Retype your password</p>
+                </div>
+            </div>
+            <p id="notmatch" style="block text-sm font-medium text-red-600"></p>
+            <input type="password" id="password2" name="password" required="true"
+                    style="p-3 border border-slate-300 rounded-md shadow-sm focus:outline-none focus:ring-amber-600 focus:border-amber-600 transition duration-150 ease-in-out"
+                    placeholder="••••••••" />
+
+
+            <button id="register" type="submit"
+                style="w-full bg-amber-600 text-white px-5 py-3 rounded-md font-bold hover:bg-amber-700 active:bg-amber-800 transition duration-150 ease-in-out">
+                Register
+            </button>
+        </form>
+
+        
+        <p style="mt-6 text-center text-sm text-slate-600">
+            Already have an account? 
+            <a href="../login" style="font-bold text-amber-600 hover:underline">Login</a>
+        </p>
+    </div>
+
+</body>
+</html>
