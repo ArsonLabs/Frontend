@@ -2,7 +2,7 @@ local token = gurt.crumbs.get("JWT_TOKEN_DO_NOT_SHARE")
 if token then 
     trace.log(token)
 else 
-    gurt.location.goto("gurt://localhost/login")
+    gurt.location.goto("gurt://arson.dev/login")
 end
 
 gurt.select('#deploy'):on('click', function()
