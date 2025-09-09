@@ -35,34 +35,34 @@
             </p>
     </div>
     <separator style="my-8 border-t border-black" />
-    <div style="text-center mb-8">
-            <form id="domainForm" style="space-y-6">
-                <div style="display: flex; flex-direction: column; gap: 4;">
-                    <p style="block text-sm font-medium text-slate-700 mb-1">Select the domain to manage.</p>
-                </div>
-                <select style="text-center max-w-40 max-h-32">
-                    <option value="option1" selected="true">arsonflare.aura</option>
-                    <option value="option2">arson.dev</option>
-                    <option value="option3">example.web</option>
-                </select>
-
-                <div style="display: flex; flex-direction: column; gap: 4;">
-                    <p style="block text-sm font-medium text-slate-700 mb-1">Select what you want to enable on the domain.</p>
-                </div>
-                <select style="text-center max-w-40 max-h-32">
-                    <option value="option1" selected="true">Static web hosting</option>
-                    <option value="option2">Proxying</option>
-                </select>
-
-                <div style="display: flex; flex-direction: column; gap: 4;">
-                    <p style="block text-sm font-medium text-slate-700 mb-1">Input the origin.</p>
-                </div>
-                <input id="origin" type="text" placeholder="255.255.255.255" maxlength="1000" minlength="1" />
-
-                <button id="deploy"type="submit"
-                    style="w-full bg-amber-600 text-white px-5 py-3 rounded-md font-bold hover:bg-amber-700 active:bg-amber-800 transition duration-150 ease-in-out">
-                    deploy
-                </button>
+    <div id="dash" style="text-center mb-8">
+        <form id="domainForm" style="space-y-6">
+            <div style="display: flex; flex-direction: column; gap: 4;">
+                <p style="block text-sm font-medium text-slate-700 mb-1">Select the domain to manage.</p>
+            </div>
+            <select id="domains" style="text-center max-w-40 max-h-32">
+                <option value="option1" selected="true">arsonflare.aura</option>
+                <option value="option2">arson.dev</option>
+                <option value="option3">example.web</option>
+            </select>
+            
+            <div style="display: flex; flex-direction: column; gap: 4;">
+                <p style="block text-sm font-medium text-slate-700 mb-1">Select what you want to enable on the domain.</p>
+            </div>
+            <select style="text-center max-w-40 max-h-32">
+                <option value="option1" selected="true">Static web hosting</option>
+                <option value="option2">Proxying</option>
+            </select>
+            
+            <div style="display: flex; flex-direction: column; gap: 4;">
+                <p style="block text-sm font-medium text-slate-700 mb-1">Input the origin.</p>
+            </div>
+            <input id="origin" type="text" placeholder="255.255.255.255" maxlength="1000" minlength="1" />
+            
+            <button id="deploy"type="submit"
+                style="w-full bg-amber-600 text-white px-5 py-3 rounded-md font-bold hover:bg-amber-700 active:bg-amber-800 transition duration-150 ease-in-out">
+                deploy
+            </button>
         </form>
     </div>
    
