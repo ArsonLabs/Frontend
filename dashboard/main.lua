@@ -1,20 +1,19 @@
 local token = gurt.crumbs.get("JWT_TOKEN_DO_NOT_SHARE")
 if not token then 
-    gurt.location.goto("gurt://arson.dev/login")
+    gurt.location.goto("gurt://arsonflare.aura/login")
 end
 
 local domains_list = {}
 
 local function render_domains()
-    local domains_container = gurt.select('#domains-list')
     local text_content = ""
-
     for _, domain in ipairs(domains_list) do
-        text_content = text_content .. "Domain: " .. domain.domain .. "\n"
-        text_content = text_content .. "  Protocol: " .. domain.protocol .. "\n"
+        text_content = text_content .. "Domain: " .. domain.domain
+        text_content = text_content .. "  Protocol: " .. domain.protocol
         text_content = text_content .. "  Origin: " .. domain.origin .. "\n\n"
+        gurt.select('#domain-list').text = text_content
     end
-    domains_container.value = text_content
+    
 end
 
 local function fetch_domains()
@@ -31,9 +30,10 @@ local function fetch_domains()
         render_domains()
     else
         gurt.select('#error').text = "Failed to fetch domains: " .. response:text()
+        trace.log(response:text())
         if response.status == 401 then
-            gurt.crumbs.set({ name = "JWT_TOKEN_DO_NOT_SHARE", value = "", lifetime = 1111111111 })
-            gurt.location.goto("gurt://arson.dev/login")
+            gurt.crumbs.delete("JWT_TOKEN_DO_NOT_SHARE")
+            gurt.location.goto("gurt://arsonflare.aura/login")
         end
     end
 end
@@ -97,8 +97,8 @@ gurt.select('#deploy'):on('click', function()
 end)
 
 gurt.select('#logout'):on('click', function()
-    gurt.crumbs.set({ name = "JWT_TOKEN_DO_NOT_SHARE", value = "", lifetime = -1 })
-    gurt.location.goto("gurt://arson.dev/login")
+    gurt.crumbs.delete("JWT_TOKEN_DO_NOT_SHARE")
+    gurt.location.goto("gurt://arsonflare.aura/login")
 end)
 
 

@@ -1,11 +1,11 @@
 gurt.select('#register'):on('click', function()
-    gurt.location.goto("gurt://localhost/register")
+    gurt.location.goto("gurt://arsonflare.aura/register")
 end)
 gurt.select('#login1'):on('click', function()
-    gurt.location.goto("gurt://localhost/login")
+    gurt.location.goto("gurt://arsonflare.aura/login")
 end)
 gurt.select('#register1'):on('click', function()
-    gurt.location.goto("gurt://localhost/register")
+    gurt.location.goto("gurt://arsonflare.aura/register")
 end)
 
  

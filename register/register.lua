@@ -20,7 +20,7 @@ gurt.select('#register'):on('click', function()
         if response:ok() then
             local text = response:text()  -- Get as text
             
-            gurt.location.goto("gurt://arson.dev/login")
+            gurt.location.goto("gurt://arsonflare.aura/login")
         else
             local text = response:text()
             gurt.select('#notmatch').text = "Error " .. response.status .. ": " .. text

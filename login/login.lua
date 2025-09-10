@@ -1,3 +1,18 @@
+local token = gurt.crumbs.get("JWT_TOKEN_DO_NOT_SHARE")
+if token then 
+    local response = fetch('https://arsonbase.smart.is-a.dev/api/domains', {
+        headers = {
+            ['Authorization'] = 'Bearer ' .. token
+        }
+    })
+
+    if response:ok() then
+        gurt.location.goto("gurt://arsonflare.aura/dashboard")
+    else
+        gurt.crumbs.delete("JWT_TOKEN_DO_NOT_SHARE")
+    end
+end
+
 gurt.select('#login'):on('click', function()
     local input = gurt.select('#username')
     local username = input.value
@@ -22,7 +37,7 @@ gurt.select('#login'):on('click', function()
             value = data.token,
             lifetime = 259200
         })
-        gurt.location.goto("gurt://localhost/dashboard")
+        gurt.location.goto("gurt://arsonflare.aura/dashboard")
     else
         local text = response:text()
         gurt.select('#error').text = "Error " .. response.status .. ": " .. text

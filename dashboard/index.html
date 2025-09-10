@@ -24,6 +24,9 @@
             <p style="font-bold text-lg text-black">rsonFlare</p>
         </div>
         <p id="username" style="text-black">Username</p>
+        <button id="logout" style="bg-red-600 text-white px-4 py-2 rounded-md hover:bg-red-700 active:bg-red-800">
+            Log Out
+        </button>
     </div>
 
     <div style="text-center mb-8">
@@ -35,8 +38,9 @@
             </p>
     </div>
     <separator style="my-8 border-t border-black" />
-    <textarea id="domains-list" readonly="true" style="w-full h-64 px-24 py-4 bg-slate-100 border border-slate-300 rounded-md"></textarea>
-    <separator style="my-8 border-t border-black" />
+    <p style="block text-sm font-medium text-slate-700 mb-1">Your current domains:</p>
+    <p id="domain-list" style="block text-sm font-medium text-slate-700 mb-1"></p>
+    <separator id="separator" style="my-8 border-t border-black" />
     <div id="dash" style="text-center mb-8">
         <form id="domainForm" style="space-y-6">
             <div style="display: flex; flex-direction: column; gap: 4;">
