@@ -1,0 +1,56 @@
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>ArsonFlare Authorization</title>
+    <script src="login.lua" />
+    <icon src="https://i.ibb.co/XrHz3d3W/logo.png" />
+    <style>
+        body {
+            bg-[#313338]
+            text-white
+            font-sans
+        }
+        input[type="text"], input[type="password"] {
+            border-2 border-slate-700 rounded-md
+            p-3
+            bg-[#1e2124]
+            text-white
+            focus:outline-none focus:ring-amber-600 focus:border-amber-600
+        }
+    </style>
+</head>
+<body style="bg-[#313338] text-white font-sans flex items-center justify-center min-h-screen p-4">
+    
+    <div style="bg-[#2c2f33] p-8 md:p-12 rounded-lg shadow-xl max-w-sm w-full mx-auto my-auto">
+        
+        <div style="text-center mb-8">
+            <p id="appName" style="text-lg font-bold text-white mb-2">Application Name failed to load.</p>
+            <p style="text-sm text-slate-400">wants to access your ArsonFlare account</p>
+        </div>
+
+        <div style="bg-[#1e2124] p-4 rounded-md mb-6">
+            <p style="text-sm font-bold text-white mb-2">This application will be able to:</p>
+            <div id="permissions" style="flex flex-col gap-2">
+                <p style="text-sm text-green-400">✔ Read your username</p>
+                <p style="text-sm text-green-400">✔ Read/Write data to your profile</p>
+                <p style="text-sm text-red-400">❌ Fix your website</p>
+            </div>
+        </div>
+        <p id="error" style="block text-sm font-medium text-red-600 text-center"></p>
+        <div style="space-y-6">
+
+            <div style="flex flex-col md:flex-row gap-4">
+                <button id="authorize"
+                    style="w-full bg-amber-600 text-white px-5 py-3 rounded-md font-bold hover:bg-amber-700 active:bg-amber-800 transition duration-150 ease-in-out">
+                    Authorize
+                </button>
+            </div>
+        </div>
+
+        <p style="mt-6 text-center text-sm text-slate-400">
+            Don't have an account? 
+            <a href="../register" style="font-bold text-amber-600 hover:underline">Create account</a>
+        </p>
+    </div>
+
+</body>

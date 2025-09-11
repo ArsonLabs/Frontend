@@ -1,4 +1,17 @@
 local token = gurt.crumbs.get("JWT_TOKEN_DO_NOT_SHARE")
+local currentUrl = gurt.location.href
+
+local query = currentUrl:match("%?(.*)")
+local params = {}
+
+if query then
+    for key, value in query:gmatch("([^&=?]+)=([^&=?]+)") do
+        params[key] = value
+    end
+end
+
+local redirect = params["redirect"]
+
 if token then 
     local response = fetch('https://arsonbase.smart.is-a.dev/api/domains', {
         headers = {
@@ -7,7 +20,11 @@ if token then
     })
 
     if response:ok() then
-        gurt.location.goto("gurt://arsonflare.aura/dashboard")
+        if redirect then 
+            gurt.location.goto(redirect)
+        else
+            gurt.location.goto("gurt://arsonflare.aura/dashboard")
+        end
     else
         gurt.crumbs.delete("JWT_TOKEN_DO_NOT_SHARE")
     end
@@ -37,7 +54,11 @@ gurt.select('#login'):on('click', function()
             value = data.token,
             lifetime = 259200
         })
-        gurt.location.goto("gurt://arsonflare.aura/dashboard")
+        if redirect then 
+            gurt.location.goto(redirect)
+        else
+            gurt.location.goto("gurt://arsonflare.aura/dashboard")
+        end
     else
         local text = response:text()
         gurt.select('#error').text = "Error " .. response.status .. ": " .. text
