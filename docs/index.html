@@ -1,0 +1,356 @@
+<head>
+    <title>ArsonX API Documentation - ArsonFlare</title>
+    <icon src="https://i.ibb.co/XrHz3d3W/logo.png" />
+    <meta name="theme-color" content="#ff6933" />
+    <meta name="description" content="Complete documentation for the ArsonX API including authentication, site management, OAuth2 flow, and JSON data storage." />
+    
+    <style>
+        body {
+            bg-[#FFFFFF]
+            text-slate-800
+            font-sans
+        }
+        
+        .code-block {
+            bg-[#1e293b]
+            text-[#cbd5e1]
+            font-mono
+            p-4
+            rounded-lg
+            text-sm
+            border
+            border-[#475569]
+        }
+        
+        .endpoint-card {
+            bg-[#f8fafc]
+            border
+            border-[#e2e8f0]
+            rounded-lg
+            p-6
+            gap-4
+        }
+        
+        .method-post {
+            bg-[#dcfce7]
+            text-[#166534]
+            px-2
+            py-1
+            rounded
+            text-sm
+            font-bold
+        }
+        
+        .method-get {
+            bg-[#dbeafe]
+            text-[#1e40af]
+            px-2
+            py-1
+            rounded
+            text-sm
+            font-bold
+        }
+        
+        .privilege-badge {
+            bg-[#fef3c7]
+            text-[#92400e]
+            px-2
+            py-1
+            rounded
+            text-xs
+            font-bold
+        }
+        
+        .client-badge {
+            bg-[#dbeafe]
+            text-[#1e40af]
+            px-2
+            py-1
+            rounded
+            text-xs
+        }
+        
+        .server-badge {
+            bg-[#dcfce7]
+            text-[#166534]
+            px-2
+            py-1
+            rounded
+            text-xs
+        }
+        
+        .info-box {
+            bg-[#eff6ff]
+            border
+            border-[#bfdbfe]
+            rounded-lg
+            p-4
+            gap-2
+        }
+    </style>
+</head>
+
+<body style="bg-[#FFFFFF]">
+    <!-- Header -->
+    <div style="bg-[#d97706] text-white py-8 px-24">
+        <div style="flex flex-row items-center gap-4 mb-4">
+            <div style="w-10 h-10 bg-white rounded flex items-center justify-center">
+                <p style="text-[#d97706] font-bold text-xl">A</p>
+            </div>
+            <h1 style="text-4xl font-bold">ArsonX API Documentation</h1>
+        </div>
+        <p style="text-[#fde68a] text-lg">Complete guide to integrating with the ArsonX authentication and data storage platform</p>
+    </div>
+
+    <!-- Introduction -->
+    <div style="px-24 py-12">
+        <div style="max-w-4xl">
+
+            
+            <div class="info-box" style="flex flex-col">
+                <h4 style="text-[#1e40af] font-bold mb-2">Base URL (For API)</h4>
+                <code style="text-[#1e40af] font-mono">https://arsonbase.smart.is-a.dev/</code>
+            </div>
+        </div>
+    </div>
+
+    <!-- OAuth2 Flow Section -->
+    <div id="oauth2" style="px-24 py-12 bg-[#f8fafc]">
+        <h2 style="text-3xl font-bold text-[#1e293b] mb-8">OAuth2 Flow for Third-Party Applications</h2>
+        
+        <div>
+            <p style="text-[#64748b] mb-6">
+                ArsonX provides a streamlined OAuth2 flow to allow users to log into your application using their ArsonFlare account. This is perfect for implementing "Login with ArsonFlare" functionality.
+            </p>
+
+            <div>
+                <h4 style="font-bold text-lg text-[#374151] mb-4">How It Works</h4>
+                <ol style="list-decimal ml-5 text-[#64748b]">
+                    <li style="mb-4">
+                        <h5 style="font-bold text-[#374151]">1. Register Your Site</h5>
+                        <p>First, register your site from the ArsonFlare dashboard. This will provide you with a unique SITE_ID (also referred to as APP_ID). You must also configure a REDIRECT_URL where users will be sent after authentication.</p>
+                    </li>
+                    <li style="mb-4">
+                        <h5 style="font-bold text-[#374151]">2. Initiate Login</h5>
+                        <p>To start the login process, redirect your users to the following GURT protocol URL. Replace YOUR-APP-ID with your site's ID.</p>
+                        <pre class="code-block mt-2"><code>gurt://arsonflare.aura/oauth2?appid=YOUR-APP-ID</code></pre>
+                    </li>
+                    <li style="mb-4">
+                        <h5 style="font-bold text-[#374151]">3. Handle the Redirect</h5>
+                        <p>After the user successfully authenticates, ArsonFlare will redirect them to your specified REDIRECT_URL, appending a short-lived, site-scoped JWT as a query parameter.</p>
+                        <pre class="code-block mt-2"><code>gurt://your.redirect.url/?token=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9...</code></pre>
+                    </li>
+                    <li>
+                        <h5 style="font-bold text-[#374151]">4. Verify the Token</h5>
+                        <p>Your application's backend can now take this token and use it to verify the user's identity by calling the /api/user/verify endpoint. This confirms the authentication is valid and provides you with the user's details.</p>
+                    </li>
+                </ol>
+            </div>
+        </div>
+    </div>
+
+    <!-- JSON Data Management Section -->
+    <div id="json-data" style="px-24 py-12">
+        <h2 style="text-3xl font-bold text-[#1e293b] mb-8">JSON Data Management</h2>
+        
+        <div class="info-box mb-8" style="flex flex-col">
+            <h4 style="text-[#1e40af] font-bold mb-2">How It Works</h4>
+            <p style="text-[#64748b]">
+                ArsonX provides a powerful and schemaless JSON database, allowing you to store data associated with your users and sites without managing a complex database schema. The data is stored in a key-value format where the key is your SITE_ID and the value is a JSON object. This object is partitioned into three privilege levels (RW, RO, ROOT) to give you fine-grained control over data access.
+            </p>
+        </div>
+
+        <!-- Privilege Levels -->
+        <div style="bg-[#fffbeb] border border-[#fed7aa] rounded-lg p-6 mb-8">
+            <h3 style="text-xl font-bold text-[#92400e] mb-4">Data Privilege Levels</h3>
+            
+            <div style="flex flex-col gap-4">
+                <div style="flex flex-row items-start gap-3">
+                    <span class="privilege-badge">RW</span>
+                    <div>
+                        <p style="font-bold text-[#374151]">Read/Write</p>
+                        <p style="text-[#64748b] text-sm">Client can read and write. Server can read and write. For general-purpose data.</p>
+                    </div>
+                </div>
+                
+                <div style="flex flex-row items-start gap-3">
+                    <span class="privilege-badge">RO</span>
+                    <div>
+                        <p style="font-bold text-[#374151]">Read-Only</p>
+                        <p style="text-[#64748b] text-sm">Client can only read. Server can read and write. For server-controlled configuration.</p>
+                    </div>
+                </div>
+                
+                <div style="flex flex-row items-start gap-3">
+                    <span class="privilege-badge">ROOT</span>
+                    <div>
+                        <p style="font-bold text-[#374151]">Root Access</p>
+                        <p style="text-[#64748b] text-sm">Client has no access. Server can read and write. For sensitive server-side data.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Write JSON Data -->
+        <h3 style="text-2xl font-bold text-[#1e293b] mb-6">Write JSON Data</h3>
+        
+        <!-- Client Write -->
+        <div style="flex flex-col gap-6 mb-12">
+            <div class="endpoint-card" style="flex flex-col">
+                <div style="flex flex-row items-center gap-4 mb-4">
+                    <span class="method-post">POST</span>
+                    <code style="text-lg font-mono">/api/db/writeJson</code>
+                    <span class="client-badge">Client</span>
+                </div>
+                <p style="text-[#64748b] mb-4">Allows client-side applications to write data. Can only write to RW privilege level.</p>
+                
+                <h5 style="font-bold text-[#374151] mb-2">Request Body:</h5>
+                <pre class="code-block"><code>{
+  "session_token": "&lt;user_session_token&gt;",
+  "site_name": "my-awesome-site",
+  "data": {
+    "user_settings": { "theme": "dark" },
+    "draft_post": "This is a draft..."
+  }
+}</code></pre>
+                
+                <h5 style="font-bold text-[#374151] mb-2 mt-4">Example using cURL:</h5>
+                <pre class="code-block"><code>curl -X POST http://localhost:3000/api/db/writeJson \
+  -H "Content-Type: application/json" \
+  -d '{
+    "session_token": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9...",
+    "site_name": "my-awesome-site",
+    "data": { "user_settings": { "theme": "dark" } }
+  }'</code></pre>
+            </div>
+        </div>
+
+        <!-- Server Write -->
+        <div style="flex flex-col gap-6 mb-12">
+            <div class="endpoint-card" style="flex flex-col">
+                <div style="flex flex-row items-center gap-4 mb-4">
+                    <span class="method-post">POST</span>
+                    <code style="text-lg font-mono">/api/db/writeJson</code>
+                    <span class="server-badge">Server</span>
+                </div>
+                <p style="text-[#64748b] mb-4">Allows backend services to write data to any privilege level.</p>
+                
+                <h5 style="font-bold text-[#374151] mb-2">Request Body:</h5>
+                <pre class="code-block"><code>{
+  "site_token": "&lt;your_site_token&gt;",
+  "privileges": "ro", // Can be "rw", "ro", or "root"
+  "data": {
+    "feature_flags": { "new_dashboard": true },
+    "api_keys": { "service_a": "secret-key" }
+  }
+}</code></pre>
+                
+                <h5 style="font-bold text-[#374151] mb-2 mt-4">Example writing to ROOT:</h5>
+                <pre class="code-block"><code>curl -X POST http://localhost:3000/api/db/writeJson \
+  -H "Content-Type: application/json" \
+  -d '{
+    "site_token": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9...",
+    "privileges": "root",
+    "data": { "internal_id": "user_xyz_processed" }
+  }'</code></pre>
+            </div>
+        </div>
+
+        <!-- Read JSON Data -->
+        <h3 style="text-2xl font-bold text-[#1e293b] mb-6">Read JSON Data</h3>
+        
+        <!-- Client Read -->
+        <div style="flex flex-col gap-6 mb-12">
+            <div class="endpoint-card" style="flex flex-col">
+                <div style="flex flex-row items-center gap-4 mb-4">
+                    <span class="method-post">POST</span>
+                    <code style="text-lg font-mono">/api/db/readJson</code>
+                    <span class="client-badge">Client</span>
+                </div>
+                <p style="text-[#64748b] mb-4">Allows client-side applications to read data. Can access RW and RO levels only.</p>
+                
+                <h5 style="font-bold text-[#374151] mb-2">Request Body:</h5>
+                <pre class="code-block"><code>{
+  "session_token": "&lt;user_session_token&gt;",
+  "site_name": "my-awesome-site"
+}</code></pre>
+                
+                <h5 style="font-bold text-[#374151] mb-2 mt-4">Success Response:</h5>
+                <pre class="code-block"><code>{
+  "data": {
+    "rw": {
+      "user_settings": { "theme": "dark" }
+    },
+    "ro": {
+      "feature_flags": { "new_dashboard": true }
+    }
+  }
+}</code></pre>
+            </div>
+        </div>
+
+        <!-- Server Read -->
+        <div style="flex flex-col gap-6">
+            <div class="endpoint-card" style="flex flex-col">
+                <div style="flex flex-row items-center gap-4 mb-4">
+                    <span class="method-post">POST</span>
+                    <code style="text-lg font-mono">/api/db/readJson</code>
+                    <span class="server-badge">Server</span>
+                </div>
+                <p style="text-[#64748b] mb-4">Allows backend services to read data from any privilege level.</p>
+                
+                <h5 style="font-bold text-[#374151] mb-2">Request Body:</h5>
+                <pre class="code-block"><code>{
+  "site_token": "&lt;your_site_token&gt;",
+  "privileges": ["ro", "root"] // Optional: specify levels. Defaults to all.
+}</code></pre>
+                
+                <h5 style="font-bold text-[#374151] mb-2 mt-4">Success Response:</h5>
+                <pre class="code-block"><code>{
+  "data": {
+    "rw": {},
+    "ro": {},
+    "root": {
+      "internal_id": "user_xyz_processed",
+      "api_keys": { "service_a": "secret-key" }
+    }
+  }
+}</code></pre>
+                
+                <h5 style="font-bold text-[#374151] mb-2 mt-4">Example reading only ROOT data:</h5>
+                <pre class="code-block"><code>curl -X POST http://localhost:3000/api/db/readJson \
+  -H "Content-Type: application/json" \
+  -d '{
+    "site_token": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9...",
+    "privileges": ["root"]
+  }'</code></pre>
+            </div>
+        </div>
+    </div>
+
+    <!-- Footer -->
+    <div style="bg-[#78350f] text-[#cbd5e1] py-16 px-24">
+        <div style="flex flex-row justify-between">
+            <div style="flex flex-row gap-24">
+                <div style="flex flex-col gap-2">
+                    <div style="flex flex-row items-center">
+                        <div style="w-8 h-8 bg-[#d97706] rounded flex items-center justify-center">
+                            <p style="text-white font-bold text-lg">A</p>
+                        </div>
+                        <p style="font-bold text-lg text-white">rsonFlare</p>
+                    </div>
+                    <p style="text-[#94a3b8]">Fast. Reliable. Simple.</p>
+                </div>
+                <div>
+                    <h5 style="font-bold text-white mb-4">Support</h5>
+                    <div style="flex flex-col gap-2">
+                        <a href="https://discord.gg/a4GVk5gbxv" style="text-[#94a3b8] hover:text-white">Discord Server</a>
+                        <a href="../" style="text-[#94a3b8] hover:text-white">Back to ArsonFlare</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <separator style="my-8 border-t border-[#475569]" />
+        <p style="text-[#6b7280] text-sm">© 2025 ArsonFlare — All rights reserved.</p>
+    </div>
+</body>
