@@ -1,22 +1,6 @@
 local token = gurt.crumbs.get("JWT_TOKEN_DO_NOT_SHARE")
-if not token then
-    gurt.location.goto("gurt://arsonflare.aura/login?redirect=" .. gurt.location.href)
-end
-
-local response = fetch('https://arsonbase.smart.is-a.dev/api/user/verify', {
-    method = 'get',
-    headers = {
-        ['Authorization'] = 'Bearer ' .. token,
-    },
-})
-if not response:ok() then
-    gurt.location.goto("gurt://arsonflare.aura/login?redirect=" .. gurt.location.href)
-end
-
 
 local currentUrl = gurt.location.href
-
--- Extract query string
 local query = currentUrl:match("%?(.*)")
 
 -- Table to store parameters
@@ -30,6 +14,20 @@ end
 -- Access your values
 local appid = params["appid"]
 local redirect = params["redirect"]
+
+if not token then
+    gurt.location.goto("gurt://arsonflare.aura/login?redirect=" .. gurt.location.href)
+end
+
+local response = fetch('https://arsonbase.smart.is-a.dev/api/user/verify', {
+    method = 'get',
+    headers = {
+        ['Authorization'] = 'Bearer ' .. token,
+    },
+})
+if not response:ok() then
+    gurt.location.goto("gurt://arsonflare.aura/login?redirect=" .. gurt.location.href)
+end
 
 local response = fetch('https://arsonbase.smart.is-a.dev/api/site/verify', {
     method = 'POST',

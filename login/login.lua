@@ -11,6 +11,7 @@ if query then
 end
 
 local redirect = params["redirect"]
+local appid = params["appid"]
 
 if token then 
     local response = fetch('https://arsonbase.smart.is-a.dev/api/domains', {
@@ -21,7 +22,11 @@ if token then
 
     if response:ok() then
         if redirect then 
-            gurt.location.goto(redirect)
+            if app_id then
+                gurt.location.goto(redirect .. "?appid=" .. appid)
+            else
+                gurt.location.goto(redirect)
+            end
         else
             gurt.location.goto("gurt://arsonflare.aura/dashboard")
         end
@@ -55,7 +60,11 @@ gurt.select('#login'):on('click', function()
             lifetime = 259200
         })
         if redirect then 
-            gurt.location.goto(redirect)
+            if appid then
+                gurt.location.goto(redirect .. "?appid=" .. appid)
+            else
+                gurt.location.goto(redirect)
+            end
         else
             gurt.location.goto("gurt://arsonflare.aura/dashboard")
         end
